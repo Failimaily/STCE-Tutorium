@@ -4,17 +4,20 @@
 
 #include "ode_system.hpp"
 
-namespace Ode {
+namespace Ode
+{
 
-template<typename TS, typename TP, int NS, int NP>
-class Solver {
-protected:
-  TP _T_end;
-  int _nts;
-public:
-  Solver(const TP &, const int);
-  virtual void solve(System<TS,TP,NS,NP>&)=0;
-};
+  template <typename TS, typename TP, int NS, int NP>
+  class Solver
+  {
+  protected:
+    TP _T_end;
+    int _nts;
+
+  public:
+    Solver(const TP &, const int);
+    virtual void solve(System<TS, TP, NS, NP> &) = 0;
+  };
 
 }
 

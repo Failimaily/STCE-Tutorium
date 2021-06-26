@@ -7,11 +7,11 @@
 #include "ode_solver_explicit_euler.hpp"
 
 int main(int argc, char *argv[]) {
-  assert(argc==4); 
+  assert(argc==4);
   using T=double;
-  int ns=std::stoi(argv[1]); assert(ns>1);
-  T T_end=std::stof(argv[2]); assert(T_end>0);
-  int nts=std::stoi(argv[3]); assert(nts>0);
+  int ns= std::stoi(argv[1]); assert(ns>1);
+  T T_end= std::stof(argv[2]); assert(T_end>0);
+  int nts= std::stoi(argv[3]); assert(nts>0);
   Diffusion::System<T,T> odesys(ns);
   Ode::Solver_Explicit_Euler<T,T,Diffusion::NS,Diffusion::NP> odesol(T_end,nts);
   odesys.p() << 1,0,42;
