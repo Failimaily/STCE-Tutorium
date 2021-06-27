@@ -13,7 +13,8 @@ int main(int argc, char *argv[]) {
   T T_end=std::stof(argv[1]); assert(T_end>0);
   int nts=std::stoi(argv[2]); assert(nts>0);
   Lotka_Volterra::System<T,T> odesys;
-  Ode::Solver_Explicit_Euler<T,T,NS,NP> odesol(T_end,nts);
+  using SYS = Lotka_Volterra::System<T,T>;
+  Ode::Solver_Explicit_Euler<SYS,T> odesol(T_end,nts);
   odesys.p()=Ode::System<T,T,NS,NP>::VTP::Random(odesys.np());
   odesys.x()=Ode::System<T,T,NS,NP>::VTS::Random(odesys.ns());
   odesol.solve(odesys);

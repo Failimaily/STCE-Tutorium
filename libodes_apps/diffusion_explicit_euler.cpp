@@ -13,7 +13,8 @@ int main(int argc, char *argv[]) {
   T T_end= std::stof(argv[2]); assert(T_end>0);
   int nts= std::stoi(argv[3]); assert(nts>0);
   Diffusion::System<T,T> odesys(ns);
-  Ode::Solver_Explicit_Euler<T,T,Diffusion::NS,Diffusion::NP> odesol(T_end,nts);
+  using SYS = Diffusion::System<T,T>;
+  Ode::Solver_Explicit_Euler<SYS,T> odesol(T_end,nts);
   odesys.p() << 1,0,42;
   odesys.x()=Ode::System<T,T,Diffusion::NS,Diffusion::NP>::VTS::Ones(odesys.ns());
   odesol.solve(odesys);

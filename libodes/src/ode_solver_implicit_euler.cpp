@@ -1,6 +1,6 @@
 namespace Ode
 {
-
+  /*
   template <typename TS, typename TP, int NS, int NP>
   System_Implicit_Euler<TS, TP, NS, NP>::
       System_Implicit_Euler(
@@ -37,7 +37,7 @@ namespace Ode
 
   template <typename TS, typename TP, int NS, int NP>
   Solver_Implicit_Euler<TS, TP, NS, NP>::
-      Solver_Implicit_Euler(Linear::Solver<TS, TP, NS, NP> &lsol, const TP &T_end, const int nts) : Ode::Solver<TS, TP, NS, NP>(T_end, nts), _lsol(lsol) {}
+      Solver_Implicit_Euler(Linear::Solver<TS, NS> &lsol) {}
 
   template <typename TS, typename TP, int NS, int NP>
   void
@@ -45,7 +45,7 @@ namespace Ode
       solve(
           Ode::System<TS, TP, NS, NP> &odes)
   {
-    if(odes::isLinear)
+    if(odes.isLinear)
     {
 
     }
@@ -61,7 +61,6 @@ namespace Ode
     }
     
   }
-
-
+  */
 
 }
