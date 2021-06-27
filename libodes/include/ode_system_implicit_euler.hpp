@@ -39,16 +39,16 @@ namespace Ode
     Solver_Implicit_Euler(Nonlinear::Solver<TS, TP, NS, NP> &, const TP &, const int);
     //Solver_Implicit_Euler(Linear::Solver<TS,NS> &);
     void solve(Ode::System<TS, TP, NS, NP> &);
-  };
+  };y
   */
 
   template <typename SYS,typename TP>
   class System_Implicit_Euler
   {
-    protected:
+    public:
       using VTS = typename SYS::VTS;
       using MTS = typename SYS::MTS;
-      SYS &_odes;
+      //SYS &_odes=null;
       VTS _x_prev;
       TP _dt;
 

@@ -3,9 +3,9 @@ namespace Ode
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
     NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::
-        NLSolver_Implicit_Euler(
+        NLSystem_Implicit_Euler(
             SYS &odes,
-            const typename NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::VTS &x_prev,
+            const typename SYS::VTS &x_prev,
             const TP &dt) : Nonlinear::System<TS, TP, NS, NP>(odes.ns(), odes.np()),
                             _odes(odes), _x_prev(x_prev), _dt(dt)
     {
@@ -13,7 +13,7 @@ namespace Ode
     }
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
-    typename NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::VTS
+    typename SYS::VTS
     NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::
         f()
     {
@@ -22,12 +22,11 @@ namespace Ode
     }
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
-    typename NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::MTS
-    NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::
+    typename SYS::MTS NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::
         dfdx()
     {
         _odes.x() = Nonlinear::System<TS, TP, NS, NP>::x();
-        return MTS::Identity(_odes.x().size(), _odes.x().size()) - _dt * _odes.dgdx();
+        return SYS::MTS::Identity(_odes.x().size(), _odes.x().size()) - _dt * _odes.dgdx();
     }
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
@@ -50,4 +49,3 @@ namespace Ode
     }
 
 }
-Y

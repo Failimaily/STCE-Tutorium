@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   //using SYS = Diffusion<T,T,
   Linear::Solver_QR<T,Diffusion::NS> lsol;
   Nonlinear::Solver_Newton<T,T,Diffusion::NS,Diffusion::NP> nlsol(lsol,eps);
-  Ode::Solver_Implicit_Euler<SYS,T,T,Diffusion::NS,Diffusion::NP> odesol(nlsol,T_end,nts);
+  Ode::NLSolver_Implicit_Euler<SYS,T,T,Diffusion::NS,Diffusion::NP> odesol(nlsol,T_end,nts);
   odesys.p() << 1,0,42;
   //odesys.isLinear = true;
   odesys.x()=Ode::System<T,T,Diffusion::NS,Diffusion::NP>::VTS::Ones(odesys.ns());

@@ -1,21 +1,26 @@
 #include "ode_system_implicit_euler.hpp"
 
 //Todo Includes
-namespace ode
+namespace Ode
 {
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
-    class NLSystem_Implicit_Euler : public System_Implicit_Euler<SYS, TP>, public Nonlinear::System<TS, TP, NS, NP>
+    class NLSystem_Implicit_Euler : public System_Implicit_Euler<SYS,TS>, public Nonlinear::System<TS, TP, NS, NP>
     {
+        SYS &_odes;
+        typename SYS::VTS _x_prev;
+        TP _dt;
     public:
-        System_Implicit_Euler(SYS &, const VTS &, const TP &);
-        VTS f();
-        MTS dfdx();
+        NLSystem_Implicit_Euler(SYS &, const typename SYS::VTS &, const TP &);
+        typename SYS::VTS f();
+        typename SYS::MTS dfdx();
     };
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
     class NLSolver_Implicit_Euler : public Solver<SYS, TP>
     {
+        using VTS = typename SYS::VTS;
+        using MTS = typename SYS::MTS;
         typename Nonlinear::Solver<TS, TP, NS, NP> &_nlsol;
 
     public:
@@ -25,5 +30,7 @@ namespace ode
         void solve(SYS &);
     };
 
-#include "../src/ode_nlsolver_implicit_euler.cpp"
+
 }
+
+#include "../src/ode_nlsolver_implicit_euler.cpp"
