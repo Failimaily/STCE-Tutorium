@@ -1,16 +1,20 @@
 #include "ode_system_implicit_euler.hpp"
 
-//Todo Includes
 namespace Ode
 {
 
     template <typename SYS, typename TS, typename TP, int NS, int NP>
     class NLSystem_Implicit_Euler : public System_Implicit_Euler<SYS,TS>, public Nonlinear::System<TS, TP, NS, NP>
     {
+        /*
         SYS &_odes;
         typename SYS::VTS _x_prev;
         TP _dt;
+        */
     public:
+        using Ode::System_Implicit_Euler<SYS,TP>::_odes;
+        using Ode::System_Implicit_Euler<SYS,TP>::_x_prev;
+        using Ode::System_Implicit_Euler<SYS,TP>::_dt;
         NLSystem_Implicit_Euler(SYS &, const typename SYS::VTS &, const TP &);
         typename SYS::VTS f();
         typename SYS::MTS dfdx();

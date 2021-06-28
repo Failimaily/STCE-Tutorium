@@ -63,4 +63,11 @@ namespace Ode
   }
   */
 
+  template <typename SYS, typename TP>
+  System_Implicit_Euler<SYS,TP>::
+      System_Implicit_Euler(
+          SYS &odes,
+          const typename SYS::VTS &x_prev,
+          const TP &dt) : _odes(odes), _x_prev(x_prev), _dt(dt)
+          {}
 }

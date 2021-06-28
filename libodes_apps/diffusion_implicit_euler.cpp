@@ -7,6 +7,7 @@
 #include "linear_solver_qr.hpp"
 #include "nonlinear_solver_newton.hpp"
 #include "ode_nlsolver_implicit_euler.hpp"
+#include "ode_lsolver_implicit_euler.hpp"
 
 int main(int argc, char *argv[]) {
   assert(argc==5); 

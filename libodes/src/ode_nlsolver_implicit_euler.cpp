@@ -7,7 +7,7 @@ namespace Ode
             SYS &odes,
             const typename SYS::VTS &x_prev,
             const TP &dt) : Nonlinear::System<TS, TP, NS, NP>(odes.ns(), odes.np()),
-                            _odes(odes), _x_prev(x_prev), _dt(dt)
+                            System_Implicit_Euler<SYS,TP>(odes,x_prev,dt)
     {
         Nonlinear::System<TS, TP, NS, NP>::x() = _x_prev;
     }
@@ -25,6 +25,7 @@ namespace Ode
     typename SYS::MTS NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP>::
         dfdx()
     {
+        
         _odes.x() = Nonlinear::System<TS, TP, NS, NP>::x();
         return SYS::MTS::Identity(_odes.x().size(), _odes.x().size()) - _dt * _odes.dgdx();
     }

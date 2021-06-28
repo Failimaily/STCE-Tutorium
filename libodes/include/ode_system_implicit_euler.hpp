@@ -42,19 +42,23 @@ namespace Ode
   };y
   */
 
-  template <typename SYS,typename TP>
+  template <typename SYS, typename TP>
   class System_Implicit_Euler
   {
-    public:
-      using VTS = typename SYS::VTS;
-      using MTS = typename SYS::MTS;
-      //SYS &_odes=null;
-      VTS _x_prev;
-      TP _dt;
+    using VTS = typename SYS::VTS;
+    using MTS = typename SYS::MTS;
+    
 
+  protected:
+    SYS &_odes;
+    VTS _x_prev;
+    TP _dt;
+    System_Implicit_Euler(SYS &, const typename SYS::VTS &, const TP &);
+
+  public:
     
   };
 
 }
 
-#include "../src/ode_solver_implicit_euler.cpp"
+#include "../src/ode_system_implicit_euler.cpp"
