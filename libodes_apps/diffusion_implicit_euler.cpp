@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   Ode::NLSolver_Implicit_Euler<SYS,T,T,Diffusion::NS,Diffusion::NP> odesol(nlsol,T_end,nts);
   odesys.p() << 1,0,42;
   //odesys.isLinear = true;
-  odesys.x()=Ode::System<T,T,Diffusion::NS,Diffusion::NP>::VTS::Ones(odesys.ns());
+  odesys.x()=Ode::Nonlinear_System<T,T,Diffusion::NS,Diffusion::NP>::VTS::Ones(odesys.ns());
   odesol.solve(odesys);
   std::cout << odesys.x().transpose() << std::endl;
   return 0;

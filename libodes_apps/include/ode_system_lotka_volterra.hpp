@@ -10,13 +10,13 @@ const int NS=2;
 const int NP=4;
 
 template<typename TS, typename TP>
-class System : public Ode::System<TS,TP,NS,NP> {
-  using Ode::System<TS,TP,NS,NP>::_x;
-  using Ode::System<TS,TP,NS,NP>::_p;
+class System : public Ode::Nonlinear_System<TS,TP,NS,NP> {
+  using Ode::Nonlinear_System<TS,TP,NS,NP>::_x;
+  using Ode::Nonlinear_System<TS,TP,NS,NP>::_p;
 public:
   System();
-  typename Ode::System<TS,TP,NS,NP>::VTS g();
-  typename Ode::System<TS,TP,NS,NP>::MTS dgdx();
+  typename Ode::Nonlinear_System<TS,TP,NS,NP>::VTS g();
+  typename Ode::Nonlinear_System<TS,TP,NS,NP>::MTS dgdx();
 };
 
 }

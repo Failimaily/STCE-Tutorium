@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
   using SYS = Diffusion::System<T,T>;
   Ode::Solver_Explicit_Euler<SYS,T> odesol(T_end,nts);
   odesys.p() << 1,0,42;
-  odesys.x()=Ode::System<T,T,Diffusion::NS,Diffusion::NP>::VTS::Ones(odesys.ns());
+  odesys.x()=Ode::Nonlinear_System<T,T,Diffusion::NS,Diffusion::NP>::VTS::Ones(odesys.ns());
   odesol.solve(odesys);
   std::cout << odesys.x().transpose() << std::endl;
   return 0;

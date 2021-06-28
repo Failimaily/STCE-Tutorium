@@ -2,17 +2,17 @@ namespace Diffusion {
 
 template<typename TS, typename TP>
 System<TS,TP>::
-System(int ns) : Ode::System<TS,TP,NS,NP>(ns,NP) {} 
+System(int ns) : Ode::Nonlinear_System<TS,TP,NS,NP>(ns,NP) {} 
 
 template<typename TS, typename TP>
 static inline typename Ode::
-System<TS,TP,NS,NP>::VTS 
+Nonlinear_System<TS,TP,NS,NP>::VTS 
 G(
-    typename Ode::System<TS,TP,NS,NP>::VTS& x, 
-    typename Ode::System<TS,TP,NS,NP>::VTP & p
+    typename Ode::Nonlinear_System<TS,TP,NS,NP>::VTS& x, 
+    typename Ode::Nonlinear_System<TS,TP,NS,NP>::VTP & p
 ) {
  int ns=x.size();
-  typename Ode::System<TS,TP,NS,NP>::VTS r(ns);
+  typename Ode::Nonlinear_System<TS,TP,NS,NP>::VTS r(ns);
   for (int i=0;i<ns;i++) {
     if (i==0) 
       r(i)=p(0)*x(i)*ns*ns*(p(1)-2*x(i)+x(i+1));
@@ -25,18 +25,18 @@ G(
 }
 
 template<typename TS, typename TP>
-typename Ode::System<TS,TP,NS,NP>::VTS 
+typename Ode::Nonlinear_System<TS,TP,NS,NP>::VTS 
 System<TS,TP>::
 g() { return G<TS,TP>(_x,_p); }
 
 template<typename TS, typename TP>
-typename Ode::System<TS,TP,NS,NP>::MTS 
+typename Ode::Nonlinear_System<TS,TP,NS,NP>::MTS 
 System<TS,TP>::
 dgdx() {
   int ns=_x.size();
-  typename Ode::System<TS,TP,NS,NP>::MTS drdx(ns,ns);
+  typename Ode::Nonlinear_System<TS,TP,NS,NP>::MTS drdx(ns,ns);
   using DCO_T=typename dco::gt1s<TS>::type; 
-  typename Ode::System<DCO_T,TP,NS,NP>::VTS x_dco (ns),r_dco(ns);
+  typename Ode::Nonlinear_System<DCO_T,TP,NS,NP>::VTS x_dco (ns),r_dco(ns);
   for (int i=0;i<ns;i++)
     dco::value(x_dco(i))=_x(i);
   for (int i=0;i<ns;i++) {

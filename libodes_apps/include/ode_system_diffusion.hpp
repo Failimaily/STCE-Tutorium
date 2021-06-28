@@ -11,15 +11,15 @@ const int NS=Utils::Dynamic;
 const int NP=3;
 
 template<typename TS, typename TP>
-class System : public Ode::System<TS,TP,NS,NP>
+class System : public Ode::Nonlinear_System<TS,TP,NS,NP>
 {
-  using Ode::System<TS,TP,NS,NP>::_x;
-  using Ode::System<TS,TP,NS,NP>::_p;
+  using Ode::Nonlinear_System<TS,TP,NS,NP>::_x;
+  using Ode::Nonlinear_System<TS,TP,NS,NP>::_p;
 
 public:
   System(int);
-  typename Ode::System<TS,TP,NS,NP>::VTS g();
-  typename Ode::System<TS,TP,NS,NP>::MTS dgdx();
+  typename Ode::Nonlinear_System<TS,TP,NS,NP>::VTS g();
+  typename Ode::Nonlinear_System<TS,TP,NS,NP>::MTS dgdx();
 };
 
 }

@@ -15,8 +15,8 @@ int main(int argc, char *argv[]) {
   Lotka_Volterra::System<T,T> odesys;
   using SYS = Lotka_Volterra::System<T,T>;
   Ode::Solver_Explicit_Euler<SYS,T> odesol(T_end,nts);
-  odesys.p()=Ode::System<T,T,NS,NP>::VTP::Random(odesys.np());
-  odesys.x()=Ode::System<T,T,NS,NP>::VTS::Random(odesys.ns());
+  odesys.p()=Ode::Nonlinear_System<T,T,NS,NP>::VTP::Random(odesys.np());
+  odesys.x()=Ode::Nonlinear_System<T,T,NS,NP>::VTS::Random(odesys.ns());
   odesol.solve(odesys);
   std::cout << odesys.x() << std::endl;
   return 0;

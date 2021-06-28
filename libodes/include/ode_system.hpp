@@ -6,51 +6,58 @@
 
 namespace Ode
 {
-
-  template <typename TS, typename TP, int NS, int NP>
+  template <typename TS, int NS>
   class System
   {
-
   public:
     using VTS = Eigen::Matrix<TS, NS, 1>;
     using MTS = Eigen::Matrix<TS, NS, NS>;
+  protected:
+  VTS _x;
+  public:
+    System(int);
+    VTS &x();
+    int ns();
+    virtual VTS g() = 0;
+  };
+
+  template <typename TS, typename TP, int NS, int NP>
+  class Nonlinear_System : public System<TS, NS>
+  {
+
+  public:
+    using VTS = typename System<TS, NS>::VTS;
+    using MTS = typename System<TS, NS>::MTS;
     using VTP = Eigen::Matrix<TP, NP, 1>;
 
   protected:
-    VTS _x;
+    using System<TS,NS>::_x;
+    
     VTP _p;
 
-
   public:
-    System(int, int);
-    int ns();
+    Nonlinear_System(int, int);
     int np();
-    VTS &x();
     VTP &p();
-    virtual VTS g() = 0;
     virtual MTS dgdx() = 0; //Jacobian
   };
 
   //New Class only for linear ode systems.
   //TODO Inheritance
   template <typename TS, int NS>
-  class Linear_System
+  class Linear_System : public System<TS, NS>
   {
 
   public:
-    using VTS = Eigen::Matrix<TS, NS, 1>;
+    using VTS = typename System<TS, NS>::VTS;
     using MTS = Eigen::Matrix<TS, NS, NS>;
 
   protected:
-    VTS _x;
     VTS _b;
     MTS _A;
-
-
+    using System<TS,NS>::_x;
   public:
     Linear_System(int);
-    int ns();
-    VTS &x();
     VTS &b();
     MTS &A();
     VTS g();

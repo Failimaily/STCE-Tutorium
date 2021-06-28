@@ -1,32 +1,34 @@
 namespace Ode
 {
+    template <typename TS, int NS>
+    System<TS, NS>::
+        System(int ns) : _x(ns) {}
+
+    template <typename TS, int NS>
+    typename System<TS,NS>::VTS& System<TS, NS>::
+        x(){ return _x;}
+
+    template <typename TS, int NS>
+    int System<TS, NS>::
+        ns(){ return _x.size();}
 
     template <typename TS, typename TP, int NS, int NP>
-    System<TS, TP, NS, NP>::
-        System(int ns, int np) : _x(ns), _p(np) {}
+    Nonlinear_System<TS, TP, NS, NP>::
+        Nonlinear_System(int ns, int np) : System<TS,NS>(ns), _p(np) {}
 
     template <typename TS, typename TP, int NS, int NP>
-    int System<TS, TP, NS, NP>::ns() { return _x.size(); }
-
+    int Nonlinear_System<TS, TP, NS, NP>::np() { return _p.size(); }
+/*
     template <typename TS, typename TP, int NS, int NP>
-    int System<TS, TP, NS, NP>::np() { return _p.size(); }
-
+    typename Nonlinear_System<TS, TP, NS, NP>::VTS &Nonlinear_System<TS, TP, NS, NP>::x() { return _x; }
+*/
     template <typename TS, typename TP, int NS, int NP>
-    typename System<TS, TP, NS, NP>::VTS &System<TS, TP, NS, NP>::x() { return _x; }
-
-    template <typename TS, typename TP, int NS, int NP>
-    typename System<TS, TP, NS, NP>::VTP &System<TS, TP, NS, NP>::p() { return _p; }
+    typename Nonlinear_System<TS, TP, NS, NP>::VTP &Nonlinear_System<TS, TP, NS, NP>::p() { return _p; }
 
 
     template <typename TS, int NS>
     Linear_System<TS,NS>::
-                        Linear_System(int ns) : _x(ns), _b(ns), _A(ns) {}
-
-    template <typename TS, int NS>
-    int Linear_System<TS,NS>::ns() {return _x.size();}
-    
-    template <typename TS, int NS>
-    typename Linear_System<TS,NS>::VTS &Linear_System<TS,NS>::x() {return _x;}
+                        Linear_System(int ns) : System<TS,NS>(ns), _b(ns), _A(ns) {}
 
     template <typename TS, int NS>
     typename Linear_System<TS,NS>::VTS &Linear_System<TS,NS>::b() {return _b;}

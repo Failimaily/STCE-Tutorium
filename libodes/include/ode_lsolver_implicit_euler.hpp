@@ -16,7 +16,7 @@ namespace Ode{
     template <typename SYS,typename TS, int NS>
     class LSolver_Implicit_Euler : public Solver<SYS,TS>
     {
-        Linear::Solver<TS,NS> &lsol;
+        Linear::Solver<TS,NS> &_lsol;
 
         public:
             using Ode::Solver<SYS,TS>::_T_end;
