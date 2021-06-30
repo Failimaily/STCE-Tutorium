@@ -45,18 +45,16 @@ namespace Ode
   template <typename SYS, typename TP>
   class System_Implicit_Euler
   {
+    
+  public:
     using VTS = typename SYS::VTS;
     using MTS = typename SYS::MTS;
-    
 
   protected:
     SYS &_odes;
     VTS _x_prev;
     TP _dt;
     System_Implicit_Euler(SYS &, const typename SYS::VTS &, const TP &);
-
-  public:
-    
   };
 
 }

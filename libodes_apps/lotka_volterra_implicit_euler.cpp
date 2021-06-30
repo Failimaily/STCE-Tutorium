@@ -18,9 +18,9 @@ int main(int argc, char *argv[]) {
   using SYS = Lotka_Volterra::System<T,T>;
   Linear::Solver_QR<T,Lotka_Volterra::NS> lsol;
   Nonlinear::Solver_Newton<T,T,Lotka_Volterra::NS,Lotka_Volterra::NP> nlsol(lsol,eps);
-  Ode::Solver_Implicit_Euler<SYS,T,T,Lotka_Volterra::NS,Lotka_Volterra::NP> odesol(nlsol,T_end,nts);
-  odesys.p()=Ode::System<T,T,Lotka_Volterra::NS,Lotka_Volterra::NP>::VTP::Random(odesys.np());
-  odesys.x()=Ode::System<T,T,Lotka_Volterra::NS,Lotka_Volterra::NP>::VTS::Random(odesys.ns());
+  Ode::NLSolver_Implicit_Euler<SYS,T,T,Lotka_Volterra::NS,Lotka_Volterra::NP> odesol(nlsol,T_end,nts);
+  odesys.p()=Ode::Nonlinear_System<T,T,Lotka_Volterra::NS,Lotka_Volterra::NP>::VTP::Random(odesys.np());
+  odesys.x()=Ode::Nonlinear_System<T,T,Lotka_Volterra::NS,Lotka_Volterra::NP>::VTS::Random(odesys.ns());
   odesol.solve(odesys);
   std::cout << odesys.x() << std::endl;
   return 0;

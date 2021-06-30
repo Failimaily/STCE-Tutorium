@@ -33,8 +33,6 @@ namespace Ode
         NLSolver_Implicit_Euler(Nonlinear::Solver<TS, TP, NS, NP> &, const TP &, const int);
         void solve(SYS &);
     };
-
-
 }
 
 #include "../src/ode_nlsolver_implicit_euler.cpp"

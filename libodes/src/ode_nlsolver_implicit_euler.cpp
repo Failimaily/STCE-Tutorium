@@ -43,9 +43,11 @@ namespace Ode
         for (int i = 0; i < _nts; i++)
         {
             typename SYS::VTS x_prev = odes.x();
+            //std::cout << x_prev << std::endl;
             typename Ode::NLSystem_Implicit_Euler<SYS, TS, TP, NS, NP> nlsys(odes, x_prev, _T_end / _nts);
             _nlsol.solve(nlsys);
-            odes.x() = nlsys.x();
+            //odes.x() = nlsys.x();
+            //std::cout << odes.x() << std::endl;
         }
     }
 

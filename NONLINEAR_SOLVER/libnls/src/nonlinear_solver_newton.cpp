@@ -11,6 +11,8 @@ Solver_Newton<TS,TP,NS,NP>::solve(System<TS,TP,NS,NP>& nlsys) {
     lsys.A()=nlsys.dfdx(); lsys.b()=-nlsys.f();
     _lsol.solve(lsys);
     nlsys.x()+=lsys.x();
+    //std::cout<<lsys.A()<<std::endl;
+    //std::cout<<lsys.b().transpose()<<std::endl;
   }
 }
 

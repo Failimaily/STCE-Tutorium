@@ -12,8 +12,7 @@ namespace Ode
   public:
     using VTS = Eigen::Matrix<TS, NS, 1>;
     using MTS = Eigen::Matrix<TS, NS, NS>;
-  protected:
-  VTS _x;
+    VTS _x;
   public:
     System(int);
     VTS &x();
@@ -37,6 +36,7 @@ namespace Ode
 
   public:
     Nonlinear_System(int, int);
+    VTS &x();
     int np();
     VTP &p();
     virtual MTS dgdx() = 0; //Jacobian
@@ -61,6 +61,7 @@ namespace Ode
     VTS &b();
     MTS &A();
     VTS g();
+    //MTS dgdx();
   };
 
 }

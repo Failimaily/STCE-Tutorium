@@ -15,10 +15,11 @@ LIBODES_INC_DIR=$(BASE_DIR)/libodes/include
 LIBODES_APPS_INC_DIR=$(BASE_DIR)/libodes_apps/include
 
 all : $(EXE)
-	./lotka_volterra_explicit_euler.exe 1 1000
-	./lotka_volterra_implicit_euler.exe 1 1000 1e-12
-	./diffusion_explicit_euler.exe 10 1 10000
-	./diffusion_implicit_euler.exe 10 1 10000 1e-5
+	#./lotka_volterra_explicit_euler.exe 1 1000
+	#./lotka_volterra_implicit_euler.exe 1 1000 1e-12
+	#./diffusion_explicit_euler.exe 10 1 10000
+	#./diffusion_implicit_euler.exe 10 1 10000 1e-5
+	./linear_system_implicit_euler.exe 1 1000 1e-5
 
 
 %.exe : %.cpp
